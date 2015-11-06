@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 30, 2015 4:33:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="training.jpa.Department" table="department" catalog="springTraining">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="30" not-null="true">
+                <comment>&#233;&#131;&#168;&#233;&#150;&#128;&#229;&#144;&#141;&#231;&#168;&#177;</comment>
+            </column>
+        </property>
+        <property name="supervisorId" type="int">
+            <column name="supervisor_id" not-null="true">
+                <comment>&#233;&#131;&#168;&#233;&#150;&#128;&#228;&#184;&#187;&#231;&#174;&#161;</comment>
+            </column>
+        </property>
+        <set name="employees" table="employee" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="department_id" not-null="true">
+                    <comment>&#233;&#131;&#168;&#233;&#150;&#128;&#231;&#183;&#168;&#232;&#153;&#159;</comment>
+                </column>
+            </key>
+            <one-to-many class="training.jpa.Employee" />
+        </set>
+    </class>
+</hibernate-mapping>

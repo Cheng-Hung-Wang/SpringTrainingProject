@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Oct 30, 2015 4:33:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="training.jpa.Employee" table="employee" catalog="springTraining">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employee" class="training.jpa.Employee" fetch="select">
+            <column name="supervisor_id" not-null="true">
+                <comment>&#228;&#184;&#187;&#231;&#174;&#161;&#231;&#183;&#168;&#232;&#153;&#159;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="department" class="training.jpa.Department" fetch="select">
+            <column name="department_id" not-null="true">
+                <comment>&#233;&#131;&#168;&#233;&#150;&#128;&#231;&#183;&#168;&#232;&#153;&#159;</comment>
+            </column>
+        </many-to-one>
+        <property name="firstName" type="string">
+            <column name="first_name" length="30" not-null="true">
+                <comment>&#229;&#147;&#161;&#229;&#183;&#165;&#229;&#144;&#141;&#229;&#173;&#151;</comment>
+            </column>
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" length="30" not-null="true">
+                <comment>&#229;&#147;&#161;&#229;&#183;&#165;&#229;&#167;&#147;&#230;&#176;&#144;</comment>
+            </column>
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="30" not-null="true">
+                <comment>&#230;&#137;&#139;&#230;&#169;&#159;&#232;&#153;&#159;&#231;&#162;&#188;</comment>
+            </column>
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="start_time" length="19" not-null="true">
+                <comment>&#229;&#136;&#176;&#232;&#129;&#183;&#230;&#151;&#165;</comment>
+            </column>
+        </property>
+        <property name="leaveTime" type="timestamp">
+            <column name="leave_time" length="19" />
+        </property>
+        <property name="level" type="byte">
+            <column name="level" not-null="true">
+                <comment>&#229;&#147;&#161;&#229;&#183;&#165;&#232;&#129;&#183;&#231;&#173;&#137;</comment>
+            </column>
+        </property>
+        <set name="employees" table="employee" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="supervisor_id" not-null="true">
+                    <comment>&#228;&#184;&#187;&#231;&#174;&#161;&#231;&#183;&#168;&#232;&#153;&#159;</comment>
+                </column>
+            </key>
+            <one-to-many class="training.jpa.Employee" />
+        </set>
+    </class>
+</hibernate-mapping>
